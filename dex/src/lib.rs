@@ -1,5 +1,5 @@
-#![deny(unaligned_references)]
 #![allow(clippy::try_err)]
+#![allow(warnings)]
 
 #[macro_use]
 pub mod error;
