@@ -577,7 +577,8 @@ impl MarketState {
     }
 
     fn pubkey(&self) -> Pubkey {
-        Pubkey::new(cast_slice(&identity(self.own_address) as &[_]))
+        let pubkey_bytes: [u8; 32] = cast(self.own_address);
+        Pubkey::new_from_array(pubkey_bytes)
     }
 }
 
@@ -1418,7 +1419,7 @@ fn send_from_vault<'a, 'b: 'a>(
         &spl_token::ID,
         vault.inner().key,
         recipient.inner().key,
-        &vault_signer.inner().key,
+        vault_signer.inner().key,
         &[],
         native_amount,
     )?;
